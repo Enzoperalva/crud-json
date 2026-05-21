@@ -85,3 +85,29 @@ def push_for_delete_student(local_file, opc_id):
 def create_file(local_file: str) -> json:
     with open(local_file, 'w') as arq:
         pass
+
+
+def register_student() -> dict:
+    name = input('Nome aluno: ').strip().capitalize()
+    if len(name) < 2:
+        return False
+    try:
+        age = int(input('Idade aluno:'))
+        new_student = {
+            "name": name,
+            "age": age
+        }
+        return new_student
+    except ValueError:
+        erro = msg.msg_erro('ERRO! Usuário digitou um valor inválido.')
+        msg.print_formatted(erro)
+        return False
+
+def register_id_student() -> int:
+    try:
+        opc_id = int(input('Escolha o id. [ 0 ] para o último: '))
+        return opc_id
+    except ValueError:
+        erro = msg.msg_erro('ERRO! Usuário digitou um valor inválido.')
+        msg.print_formatted(erro)
+        return False

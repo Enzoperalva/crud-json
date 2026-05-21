@@ -2,34 +2,8 @@ from rich import print
 from time import sleep
 import service, msg
 
-def register_student() -> dict:
-    name = input('Nome aluno: ').strip().capitalize()
-    if len(name) < 2:
-        return False
-    try:
-        age = int(input('Idade aluno:'))
-        new_student = {
-            "name": name,
-            "age": age
-        }
-        return new_student
-    except ValueError:
-        erro = msg.msg_erro('ERRO! Usuário digitou um valor inválido.')
-        msg.print_formatted(erro)
-        return False
-
-def register_id_student() -> int:
-    try:
-        opc_id = int(input('Escolha o id. [ 0 ] para o último: '))
-        return opc_id
-    except ValueError:
-        erro = msg.msg_erro('ERRO! Usuário digitou um valor inválido.')
-        msg.print_formatted(erro)
-        return False
-
-
 def sending_new_student(local_file:str) -> bool:
-    new_student = register_student()
+    new_student = service.register_student()
     if not new_student:
         error = msg.msg_erro('ERRO! Usuário digitou um nome inválido.')
         msg.print_formatted(error)
@@ -65,8 +39,8 @@ def list_student(local_file: str) -> bool:
 def update_student(local_file: str) -> bool:
     list_student(local_file)
 
-    opc_id = register_id_student()
-    new_student = register_student()
+    opc_id = service.register_id_student()
+    new_student = service.register_student()
     
     if not new_student:
         erro = msg.msg_erro('ERRO! Usuário digitou um nome inválido.')
@@ -79,5 +53,5 @@ def update_student(local_file: str) -> bool:
 
 def delete_student(local_file: str) -> bool:
     list_student(local_file)
-    opc_id = register_id_student()
+    opc_id = service.register_id_student()
     service.push_for_delete_student(local_file, opc_id)
