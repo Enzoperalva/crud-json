@@ -5,4 +5,6 @@ ERRORS = [
 
 SUCCESS = [
     {"student_added": "Aluno cadastrado!"},
+    {"updated_student": "Aluno atualizado!"},
+    {"deleted_student": "Aluno deletado!"}
 ]

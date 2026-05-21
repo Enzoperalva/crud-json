@@ -50,12 +50,10 @@ def push_for_update_student(local_file: str, new_student: dict, opc_id: int) -> 
         with open(local_file, 'w', encoding='utf-8') as arq:
             json.dump(data, arq, indent=4, ensure_ascii=False)
         
-        return const.SUCCESS[1]["Updated_student"]
+        return const.SUCCESS[1]["updated_student"]
 
     except FileNotFoundError:
-        erro = msg.msg_erro('ERRO! Você não adicionou nenhum aluno.')
-        msg.print_formatted(erro)
-        return False
+        return const.ERRORS[0]["no_students_added"]
     
 
 def push_for_delete_student(local_file, opc_id):
@@ -67,9 +65,7 @@ def push_for_delete_student(local_file, opc_id):
             len_data = len(data) 
 
             if opc_id > len_data:
-                erro = msg.msg_erro('ERRO! Id não encontrado.')
-                msg.print_formatted(erro)
-                return False
+                return const.ERRORS[1]["id_not_found"]
             
             opc_id = opc_id - 1
             log_data = data.pop(opc_id)
@@ -80,12 +76,10 @@ def push_for_delete_student(local_file, opc_id):
         ok = msg.msg_success(f'ALUNO {log_data["name"]} DELETADO')
         msg.print_formatted(ok)
 
-        return True   
+        return const.SUCCESS[2]["deleted_student"] 
             
     except FileNotFoundError:
-        erro = msg.msg_erro('ERRO! Você não adicionou nenhum aluno.')
-        msg.print_formatted(erro)
-        return False
+        return const.ERRORS[0]["no_students_added"]
 
 
 def create_file(local_file: str) -> json:
