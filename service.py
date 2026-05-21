@@ -25,13 +25,13 @@ def file_push_list(local_file: str) -> json:
         with open(local_file, 'r', encoding='utf-8') as arq:
             content = arq.read()
             if not content:
-                return False
+                return const.ERRORS[0]["no_students_added"]
             
             data = json.loads(content)
             return  data
     except FileNotFoundError:
-        return False
-    
+        return const.ERRORS[0]["no_students_added"]
+        
 
 def push_for_update_student(local_file: str, new_student: dict, opc_id: int) -> bool:
      
@@ -90,3 +90,8 @@ def push_for_delete_student(local_file, opc_id):
         erro = msg.msg_erro('ERRO! Você não adicionou nenhum aluno.')
         msg.print_formatted(erro)
         return False
+
+
+def create_file(local_file: str) -> json:
+    with open(local_file, 'w') as arq:
+        pass

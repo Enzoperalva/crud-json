@@ -1,8 +1,12 @@
 from rich import print
 from time import sleep
-import core, msg, os
+import core, msg, os, service
 
 ARCHIVE_LOG_STUDENT = 'alunos.json'
+
+if not os.path.isfile(ARCHIVE_LOG_STUDENT):
+    service.create_file(ARCHIVE_LOG_STUDENT)
+
 while True:
     print('[blue]1 -[/] [purple]Criar usuário[/] \n'
         '[blue]2 -[/] [purple]Listar usuários[/] \n'

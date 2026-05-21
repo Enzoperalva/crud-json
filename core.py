@@ -48,7 +48,7 @@ def add_student(local_file:str) -> bool:
 
 def list_student(local_file: str) -> bool:
     data = service.file_push_list(local_file)
-    if data:
+    if not data == "Você não adicionou nenhum aluno.":
         cont = 0
         print('ID - NOME - IDADE')
         for item in data:
@@ -58,7 +58,7 @@ def list_student(local_file: str) -> bool:
         sleep(1)
         return True
     
-    erro = msg.msg_erro('ERRO! Você não adicionou nenhum aluno.')
+    erro = msg.msg_erro(data)
     msg.print_formatted(erro)
     return False
 
