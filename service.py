@@ -1,7 +1,7 @@
 import json, msg
 import constants as const
 
-def file_push_json(local_file: str, new_student:dict) -> bool:
+def adding_student_to_json(local_file: str, new_student:dict) -> bool:
     try:
         with open(local_file, 'r', encoding='utf-8') as arq:
             content = arq.read()

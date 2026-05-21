@@ -28,7 +28,7 @@ while True:
         msg.print_formatted(erro)
         continue
     options = {
-        1: lambda: core.add_student(FILE_LOG_STUDENT),
+        1: lambda: core.sending_new_student(FILE_LOG_STUDENT),
         2: lambda: core.list_student(FILE_LOG_STUDENT),
         3: lambda: core.update_student(FILE_LOG_STUDENT),
         4: lambda: core.delete_student(FILE_LOG_STUDENT)

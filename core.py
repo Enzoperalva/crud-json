@@ -28,21 +28,21 @@ def register_id_student() -> int:
         return False
 
 
-def add_student(local_file:str) -> bool:
+def sending_new_student(local_file:str) -> bool:
     new_student = register_student()
     if not new_student:
-        erro = msg.msg_erro('ERRO! Usuário digitou um nome inválido.')
-        msg.print_formatted(erro)
+        error = msg.msg_erro('ERRO! Usuário digitou um nome inválido.')
+        msg.print_formatted(error)
         return False
     
-    student_json = service.file_push_json(local_file, new_student)
+    student_json = service.adding_student_to_json(local_file, new_student)
     if student_json == "Aluno cadastrado!":
         ok = msg.msg_success(student_json)
         msg.print_formatted(ok)
         return True
     
-    erro = msg.msg_erro(student_json)
-    msg.print_formatted(erro)
+    error = msg.msg_erro(student_json)
+    msg.print_formatted(error)
     return False
 
 
