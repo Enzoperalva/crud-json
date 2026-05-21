@@ -21,7 +21,7 @@ def sending_new_student(local_file:str) -> bool:
 
 
 def list_student(local_file: str) -> bool:
-    data = service.reading_files(local_file)
+    data = service.reading_file(local_file)
     if not data == "Você não adicionou nenhum aluno.":
         cont = 0
         print('ID - NOME - IDADE')
@@ -47,7 +47,12 @@ def update_student(local_file: str) -> bool:
         msg.print_formatted(erro)
         return False
     
-    service.updating_file(local_file, new_student, opc_id)
+    content = service.updating_student_in_json(local_file, new_student, opc_id)
+    
+    if content == "Aluno atualizado!":
+        success = msg.msg_success(content)
+        msg.print_formatted(success)
+
     return True
 
 

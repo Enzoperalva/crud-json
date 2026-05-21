@@ -1,7 +1,6 @@
-import json, msg
-import constants as const
+import constants as const, json
 
-def adding_student_to_json(local_file: str, new_student:dict) -> bool:
+def adding_student_to_json(local_file: str, new_student:dict) -> str:
     try:
         with open(local_file, 'r', encoding='utf-8') as arq:
             content = arq.read()
@@ -19,13 +18,18 @@ def adding_student_to_json(local_file: str, new_student:dict) -> bool:
 
     return const.SUCCESS[0]["student_added"]
     
-    
-def reading_files(local_file: str) -> json:
+def file_is_empty(local_file: str) -> str:
+    with open(local_file, 'r', encoding='utf-8') as arq:
+        content = arq.read()
+        if not content:
+            return const.ERRORS[0]["no_students_added"]
+        return content
+
+
+def reading_file(local_file: str) -> list:
     try:    
         with open(local_file, 'r', encoding='utf-8') as arq:
-            content = arq.read()
-            if not content:
-                return const.ERRORS[0]["no_students_added"]
+            content = file_is_empty(local_file)
             
             data = json.loads(content)
             return  data
@@ -33,20 +37,22 @@ def reading_files(local_file: str) -> json:
         return const.ERRORS[0]["no_students_added"]
         
 
-def updating_file(local_file: str, new_student: dict, opc_id: int) -> bool:
-     
+def updating_student_in_json(local_file: str, new_student: dict, opc_id: int) -> str:
     try:
         with open(local_file, 'r', encoding='utf-8') as arq:
-            data = json.load(arq)
+            content = arq.read()
+            if not content:
+                return const.ERRORS[0]["no_students_added"]
+            
+            data = json.loads(content)
             len_data = len(data) 
             
             if opc_id > len_data:
                 return const.ERRORS[1]["id_not_found"]
             
             opc_id = opc_id - 1
-                
-            data[opc_id]['name'] = new_student['name'] 
-            data[opc_id]['age'] = new_student['age']
+
+            data[opc_id] = new_student
         with open(local_file, 'w', encoding='utf-8') as arq:
             json.dump(data, arq, indent=4, ensure_ascii=False)
         
