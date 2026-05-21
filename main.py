@@ -2,10 +2,10 @@ from rich import print
 from time import sleep
 import core, msg, os, service
 
-ARCHIVE_LOG_STUDENT = 'alunos.json'
+FILE_LOG_STUDENT = 'alunos.json'
 
-if not os.path.isfile(ARCHIVE_LOG_STUDENT):
-    service.create_file(ARCHIVE_LOG_STUDENT)
+if not os.path.isfile(FILE_LOG_STUDENT):
+    service.create_file(FILE_LOG_STUDENT)
 
 while True:
     print('[blue]1 -[/] [purple]Criar usuário[/] \n'
@@ -28,10 +28,10 @@ while True:
         msg.print_formatted(erro)
         continue
     options = {
-        1: lambda: core.add_student(ARCHIVE_LOG_STUDENT),
-        2: lambda: core.list_student(ARCHIVE_LOG_STUDENT),
-        3: lambda: core.update_student(ARCHIVE_LOG_STUDENT),
-        4: lambda: core.delete_student(ARCHIVE_LOG_STUDENT)
+        1: lambda: core.add_student(FILE_LOG_STUDENT),
+        2: lambda: core.list_student(FILE_LOG_STUDENT),
+        3: lambda: core.update_student(FILE_LOG_STUDENT),
+        4: lambda: core.delete_student(FILE_LOG_STUDENT)
     }
 
     if option not in (1, 2, 3, 4, 5):

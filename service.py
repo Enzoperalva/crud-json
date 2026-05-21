@@ -41,9 +41,7 @@ def push_for_update_student(local_file: str, new_student: dict, opc_id: int) -> 
             len_data = len(data) 
             
             if opc_id > len_data:
-                erro = msg.msg_erro('ERRO! Id não encontrado.')
-                msg.print_formatted(erro)
-                return False
+                return const.ERRORS[1]["id_not_found"]
             
             opc_id = opc_id - 1
                 
@@ -52,9 +50,7 @@ def push_for_update_student(local_file: str, new_student: dict, opc_id: int) -> 
         with open(local_file, 'w', encoding='utf-8') as arq:
             json.dump(data, arq, indent=4, ensure_ascii=False)
         
-        ok = msg.msg_success('ALUNO ATUALIZADO!')
-        msg.print_formatted(ok)
-        return True
+        return const.SUCCESS[1]["Updated_student"]
 
     except FileNotFoundError:
         erro = msg.msg_erro('ERRO! Você não adicionou nenhum aluno.')
