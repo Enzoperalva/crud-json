@@ -21,7 +21,7 @@ def sending_new_student(local_file:str) -> bool:
 
 
 def list_student(local_file: str) -> bool:
-    data = service.file_push_list(local_file)
+    data = service.reading_files(local_file)
     if not data == "Você não adicionou nenhum aluno.":
         cont = 0
         print('ID - NOME - IDADE')
@@ -47,11 +47,11 @@ def update_student(local_file: str) -> bool:
         msg.print_formatted(erro)
         return False
     
-    service.push_for_update_student(local_file, new_student, opc_id)
+    service.updating_file(local_file, new_student, opc_id)
     return True
 
 
 def delete_student(local_file: str) -> bool:
     list_student(local_file)
     opc_id = service.register_id_student()
-    service.push_for_delete_student(local_file, opc_id)
+    service.deleting_student(local_file, opc_id)

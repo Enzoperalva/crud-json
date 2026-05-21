@@ -20,7 +20,7 @@ def adding_student_to_json(local_file: str, new_student:dict) -> bool:
     return const.SUCCESS[0]["student_added"]
     
     
-def file_push_list(local_file: str) -> json:
+def reading_files(local_file: str) -> json:
     try:    
         with open(local_file, 'r', encoding='utf-8') as arq:
             content = arq.read()
@@ -33,7 +33,7 @@ def file_push_list(local_file: str) -> json:
         return const.ERRORS[0]["no_students_added"]
         
 
-def push_for_update_student(local_file: str, new_student: dict, opc_id: int) -> bool:
+def updating_file(local_file: str, new_student: dict, opc_id: int) -> bool:
      
     try:
         with open(local_file, 'r', encoding='utf-8') as arq:
@@ -56,9 +56,7 @@ def push_for_update_student(local_file: str, new_student: dict, opc_id: int) -> 
         return const.ERRORS[0]["no_students_added"]
     
 
-def push_for_delete_student(local_file, opc_id):
-    log_data = None
-
+def deleting_student(local_file, opc_id):
     try:
         with open(local_file, 'r', encoding='utf-8') as arq:
             data = json.load(arq)
@@ -68,13 +66,9 @@ def push_for_delete_student(local_file, opc_id):
                 return const.ERRORS[1]["id_not_found"]
             
             opc_id = opc_id - 1
-            log_data = data.pop(opc_id)
         
         with open(local_file, 'w', encoding='utf-8') as arq:
             json.dump(data, arq, indent=4, ensure_ascii=False)
-
-        ok = msg.msg_success(f'ALUNO {log_data["name"]} DELETADO')
-        msg.print_formatted(ok)
 
         return const.SUCCESS[2]["deleted_student"] 
             
@@ -90,7 +84,7 @@ def create_file(local_file: str) -> json:
 def register_student() -> dict:
     name = input('Nome aluno: ').strip().capitalize()
     if len(name) < 2:
-        return False
+        return const.ERRORS[3]["invalid_name"]
     try:
         age = int(input('Idade aluno:'))
         new_student = {
@@ -99,15 +93,11 @@ def register_student() -> dict:
         }
         return new_student
     except ValueError:
-        erro = msg.msg_erro('ERRO! Usuário digitou um valor inválido.')
-        msg.print_formatted(erro)
-        return False
+        return const.ERRORS[2]["value_error"]
 
 def register_id_student() -> int:
     try:
         opc_id = int(input('Escolha o id. [ 0 ] para o último: '))
         return opc_id
     except ValueError:
-        erro = msg.msg_erro('ERRO! Usuário digitou um valor inválido.')
-        msg.print_formatted(erro)
-        return False
+        return const.ERRORS[2]["value_error"]
