@@ -14,18 +14,21 @@ def print_formatted(msg: str, sleep_time: float=1) -> None:
     sleep(sleep_time)
     print()
 
+def msg_friendly(msg):
+    return f'[cyan]{msg}[/]'
 
 def feedback_for_user(msg: str, type_msg: str) -> None:
     type_msg = type_msg.strip().lower()
+
     if type_msg == 'error':
         erro = msg_erro(msg)
         print_formatted(erro)
     elif type_msg == 'success':
         success = msg_success(msg)
         print_formatted(success)
-    elif type_msg == 'bye':
-        
-        pass
+    elif type_msg == 'friendly':
+        friendly = msg_friendly(msg)
+        print_formatted(friendly)
     else:
-        raise ValueError('Parametros válido para type_msg = "error" | "success"')
+        raise ValueError('Parametros válido para type_msg = "error" | "success" | "friendly"')
     
