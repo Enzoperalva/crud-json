@@ -79,8 +79,3 @@ def evalueted_content_file(local_file: str) -> str | bool:
 def create_file(local_file: str) -> None:
     with open(local_file, 'w') as arq:
         pass
-
-
-def print_error(txt):
-    erro = msg.msg_erro(txt)
-    msg.print_formatted(erro)
