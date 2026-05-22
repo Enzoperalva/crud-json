@@ -1,5 +1,4 @@
 from rich import print
-from time import sleep
 import core, msg, os, service
 
 FILE_LOG_STUDENT = 'alunos.json'
@@ -40,7 +39,6 @@ while True:
     if data:
         data()
     else:
-        print('[cyan]Obrigado por usar o meu script<3[/]')
-        sleep(1)
+        msg.feedback_for_user("Obrigado por usar o meu script<3", "friendly")
         os.system('clear')
         break
