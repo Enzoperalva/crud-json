@@ -22,8 +22,7 @@ def reading_file(local_file: str) -> list | str:
     if not content:
         return const.ERRORS[0]["no_students_added"]
     
-    data = json.loads(content)
-    return  data
+    return  content
         
 
 def updating_student_in_json(local_file: str, new_student: dict, opc_id: int) -> str:
@@ -31,17 +30,16 @@ def updating_student_in_json(local_file: str, new_student: dict, opc_id: int) ->
     if not content:
         return const.ERRORS[0]["no_students_added"]
     
-    data = json.loads(content)
-    len_data = len(data) 
+    len_content = len(content) 
     
-    if opc_id > len_data:
+    if opc_id > len_content:
         return const.ERRORS[1]["id_not_found"]
     
     indice = opc_id - 1
-    data[indice] = new_student
+    content[indice] = new_student
     
     with open(local_file, 'w', encoding='utf-8') as arq:
-        json.dump(data, arq, indent=4, ensure_ascii=False)
+        json.dump(content, arq, indent=4, ensure_ascii=False)
     
     return const.SUCCESS[1]["updated_student"]
 
@@ -52,17 +50,17 @@ def deleting_student(local_file: str, opc_id: int) -> str:
     if not content:
         return const.ERRORS[0]["no_students_added"]
     
-    data = json.loads(content)
-    len_data = len(data) 
+    content
+    len_content = len(content) 
 
-    if opc_id > len_data:
+    if opc_id > len_content:
         return const.ERRORS[1]["id_not_found"]
     
     indice = opc_id - 1
-    log_data = data.pop(indice)
+    log_content = content.pop(indice)
 
     with open(local_file, 'w', encoding='utf-8') as arq:
-        json.dump(data, arq, indent=4, ensure_ascii=False)
+        json.dump(content, arq, indent=4, ensure_ascii=False)
 
     return const.SUCCESS[2]["deleted_student"]            
 

@@ -1,5 +1,4 @@
 from rich import print
-# import core.flow as flow, ui.msg as msg, os, core.service as service
 import os, core.flow as flow, ui.msg as msg, core.service as service
 
 FILE_LOG_STUDENT = 'alunos.json'
