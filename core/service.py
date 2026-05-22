@@ -5,7 +5,7 @@ def adding_student_to_json(local_file: str, new_student:dict) -> str:
         content = json.load(arq)
         registered_student = []
         if content:
-            registered_student = json.loads(content)
+            registered_student = content
 
     registered_student.append(new_student)    
     
