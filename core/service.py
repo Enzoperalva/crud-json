@@ -1,8 +1,8 @@
-import constants as const, json, msg
+import config.constants as const, json
 
 def adding_student_to_json(local_file: str, new_student:dict) -> str:
     with open(local_file, 'r', encoding='utf-8') as arq:
-        content = arq.read()
+        content = json.load(arq)
         registered_student = []
         if content:
             registered_student = json.loads(content)
@@ -19,7 +19,6 @@ def adding_student_to_json(local_file: str, new_student:dict) -> str:
 
 def reading_file(local_file: str) -> list | str:
     content = evalueted_content_file(local_file)
-    
     if not content:
         return const.ERRORS[0]["no_students_added"]
     
@@ -70,7 +69,7 @@ def deleting_student(local_file: str, opc_id: int) -> str:
 
 def evalueted_content_file(local_file: str) -> str | bool:
     with open(local_file, 'r', encoding='utf-8') as arq:
-        content = arq.read()
+        content = json.load(arq)
         if not content:
             return False
         return content

@@ -1,5 +1,6 @@
 from rich import print
-import core, msg, os, service
+# import core.flow as flow, ui.msg as msg, os, core.service as service
+import os, core.flow as flow, ui.msg as msg, core.service as service
 
 FILE_LOG_STUDENT = 'alunos.json'
 
@@ -25,10 +26,10 @@ while True:
         msg.feedback_for_user('ERRO! Usuário digitou um valor inválido.', 'error')
         continue
     options = {
-        1: lambda: core.sending_new_student(FILE_LOG_STUDENT),
-        2: lambda: core.list_student(FILE_LOG_STUDENT),
-        3: lambda: core.update_student(FILE_LOG_STUDENT),
-        4: lambda: core.delete_student(FILE_LOG_STUDENT)
+        1: lambda: flow.sending_new_student(FILE_LOG_STUDENT),
+        2: lambda: flow.list_student(FILE_LOG_STUDENT),
+        3: lambda: flow.update_student(FILE_LOG_STUDENT),
+        4: lambda: flow.delete_student(FILE_LOG_STUDENT)
     }
 
     if option not in (1, 2, 3, 4, 5):

@@ -1,5 +1,5 @@
 from time import sleep
-import service, msg, constants as const
+import core.service as service, ui.msg as msg, config.constants as const
 
 def sending_new_student(local_file:str) -> bool:
     new_student = register_student()
@@ -33,8 +33,10 @@ def list_student(local_file: str) -> bool:
 
 
 def update_student(local_file: str) -> bool:
-    list_student(local_file)
-
+    exists = list_student(local_file)
+    if not exists:
+        return
+    
     opc_id = register_id_student()
     new_student = register_student()
     
@@ -56,13 +58,14 @@ def update_student(local_file: str) -> bool:
 
 
 def delete_student(local_file: str) -> bool:
-    list_student(local_file)
-    opc_id = register_id_student()
+    exists = list_student(local_file)
+    if not exists:
+        return
     
+    opc_id = register_id_student()
     if opc_id == "Usuário digitou um valor inválido.":
         msg.feedback_for_user(opc_id, "error")
         return False
-    
     content = service.deleting_student(local_file, opc_id)
     if content == "Você não adicionou nenhum aluno.":
         msg.feedback_for_user(content, "error")
