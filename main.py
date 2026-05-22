@@ -12,20 +12,18 @@ while True:
         '[blue]2 -[/] [purple]Listar usuários[/] \n'
         '[blue]3 -[/] [purple]Atualizar usuários[/]\n'
         '[blue]4 -[/] [purple]Deletar usuário[/] \n'
-        '[blue]5 -[/] [purple]Sar[/]'
+        '[blue]5 -[/] [purple]Sair[/]'
     )
 
     try:
         option = int(input('Opção: '))
         print()
-    except KeyboardInterrupt:   
-        erro = msg.msg_erro('\nUsuário forçou saida!')
-        msg.print_formatted(erro)
+    except KeyboardInterrupt:
+        msg.feedback_for_user('\nUsuário forçou saida!', 'error')
         os.system('clear')
         break
     except ValueError:
-        erro = msg.msg_erro('ERRO! Usuário digitou um valor inválido.')
-        msg.print_formatted(erro)
+        msg.feedback_for_user('ERRO! Usuário digitou um valor inválido.', 'error')
         continue
     options = {
         1: lambda: core.sending_new_student(FILE_LOG_STUDENT),
@@ -35,15 +33,14 @@ while True:
     }
 
     if option not in (1, 2, 3, 4, 5):
-        erro = msg.msg_erro('ERRO! Usuário selecionou índice inválido.')
-        msg.print_formatted(erro)
+        msg.feedback_for_user('ERRO! Usuário selecionou índice inválido.', 'error')
         continue
     
     data = options.get(option)
     if data:
         data()
     else:
-        print('[cyan]Obrigado por usar nosso pograma<3[/]')
+        print('[cyan]Obrigado por usar o meu script<3[/]')
         sleep(1)
         os.system('clear')
         break
